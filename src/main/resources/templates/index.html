@@ -6,7 +6,11 @@
 </head>
 <body>
 <h1 th:text="'Main Index'">This is the main index page for the Recipe application</h1>
-<h2>some more headings.......</h2>
+<h2 th:text="'Category : ' + ${categoryDescription.get().getDescription()}"></h2>
+<h2 th:text="'Unit Of Measure : ' + ${uomDescription.get().getDescription()}"></h2>
+<tr th:each="recipe :  ${recipes}">
+    <td th:text="${recipe}"></td>
+</tr>
 
 
 </body>
