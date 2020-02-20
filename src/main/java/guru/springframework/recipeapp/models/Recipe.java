@@ -1,6 +1,8 @@
 package guru.springframework.recipeapp.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,9 +18,11 @@ public class Recipe {
     private Integer cookTime;
     private Integer servings;
     private String url;
+
+    @Lob
     private String directions;
 
-    //This will create a binary large object field in databse because of the Byte array
+    //This will create a binary large object field in database because of the Byte array
     @Lob
     private Byte[] image;
 
@@ -30,13 +34,18 @@ public class Recipe {
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name= "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories= new HashSet<>();
+
+    public void addRecipe(String description, BigDecimal amount, UnitOfMeasure uom)
+    {
+        getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), uom, this));
+    }
 
     public Long getId() {
         return id;
