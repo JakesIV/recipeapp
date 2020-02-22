@@ -3,61 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" c
+            rossorigin="anonymous"></script>
+
 </head>
 <body>
-<h1 th:text="'Main Index'">This is the main index page for the Recipe application</h1>
-
-<table id="recipes" class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width: 10px;">Id</th>
-            <th style="width: 300px;">Description</th>
-            <th style="width: 10px;">Prep Time</th>
-            <th style="width: 10px;">Cook Time</th>
-            <th style="width: 150px;">Ingredients</th>
-            <th style="width: 150px;">Notes</th>
-            <th style="width: 10px;">Servings</th>
-            <th style="width: 50px;">URL</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="recipe :  ${recipes}">
-            <td th:text="${recipe.id}"></td>
-            <td th:text="${recipe.description}"></td>
-            <td th:text="${recipe.prepTime}"></td>
-            <td th:text="${recipe.cookTime}"></td>
-            <td>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Unit Of Measure</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="ingredient : ${recipe.ingredients}">
-                            <td th:text="${ingredient.description}"></td>
-                            <td th:text="${ingredient.amount}"></td>
-                            <td th:text="${ingredient.uom.description}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-            <td th:text="${recipe.notes.recipeNotes}"></td>
-            <td th:text="${recipe.servings}"></td>
-            <td th:text="${recipe.url}"></td>
-            <td>
-                <a th:href="${recipe.url}" th:text="'Recipe Link'"></a>
-            </td>
-            <td>
-                <div class="col-md-12">
-                    <img class="img-responsive" src="/source" th:src="${recipe.notes}"/>
+<div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">My Recipes</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                            <table id="recipes" class="table table-hover">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th style="width: 10px;">Id</th>
+                                    <th style="width: 300px;">Description</th>
+                                    <th style="width: 10px;">Prep Time</th>
+                                    <th style="width: 10px;">Cook Time</th>
+                                    <th style="width: 150px;">Ingredients</th>
+                                    <th style="width: 150px;">Notes</th>
+                                    <th style="width: 10px;">Servings</th>
+                                    <th style="width: 50px;">URL</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="recipe :  ${recipes}">
+                                    <td th:text="${recipe.id}"></td>
+                                    <td th:text="${recipe.description}"></td>
+                                    <td th:text="${recipe.prepTime}"></td>
+                                    <td th:text="${recipe.cookTime}"></td>
+                                    <td>
+                                        <table id="ingredients" class="table table-hover">
+                                            <thead class="thead-inverse">
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th>Amount</th>
+                                                    <th>Unit Of Measure</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="ingredient : ${recipe.ingredients}">
+                                                    <td th:text="${ingredient.description}"></td>
+                                                    <td th:text="${ingredient.amount}"></td>
+                                                    <td th:text="${ingredient.uom.description}"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td th:text="${recipe.notes.recipeNotes}"></td>
+                                    <td th:text="${recipe.servings}"></td>
+                                    <td th:text="${recipe.url}"></td>
+                                    <td>
+                                        <a th:href="${recipe.url}" th:text="'Recipe Link'"></a>
+                                    </td>
+                                    <td>
+                                        <!--<div class="col-md-12">
+                                            <img class="img-responsive" src="/source" th:src="${recipe.image}"/>
+                                        </div>-->
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </div>
+        </div>
+</div>
+
+
 
 
 </body>
