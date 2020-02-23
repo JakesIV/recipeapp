@@ -24,7 +24,7 @@ public class IndexController {
     }
 
     @RequestMapping({"","/","index","index.html"})
-    public String index(Model model){
+    public String getIndexPage(Model model){
         log.debug("We are now in the Index controller class");
         //This refers to index.html in template folder
         model.addAttribute("recipes", recipeService.getRecipes());
