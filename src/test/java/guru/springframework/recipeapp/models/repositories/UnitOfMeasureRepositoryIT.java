@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 //Brings in Spring context
 @RunWith(SpringRunner.class)
-//Bring up imbedded database and configure Spring data JPA
+//Bring up embedded database and configure Spring data JPA
 @DataJpaTest
 public class UnitOfMeasureRepositoryIT {
 
