@@ -1,13 +1,12 @@
 package guru.springframework.recipeapp.models;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CategoryTest {
 
@@ -42,6 +41,7 @@ class CategoryTest {
 
         recipes.add(recipe);
         category.setRecipe(recipes);
+
         assertEquals(recipes, category.getRecipe());
     }
 }
