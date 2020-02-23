@@ -7,13 +7,14 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.mockito.Mockito.*;
 
 public class IndexControllerTest {
@@ -32,6 +33,15 @@ public class IndexControllerTest {
         MockitoAnnotations.initMocks(this);
         indexController = new IndexController(recipeService);
 
+    }
+
+    //This is suppose to keep your test very light
+    @Test
+    public void testMockMVC() {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        //this command does not work but its suppose to check the http return code and make sure the document index is returned
+        //mockMvc.perform(get("/")).andExpect(status().isOK)).andExpect(view().name("index"));
     }
 
     @Test
